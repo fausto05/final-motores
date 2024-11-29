@@ -8,7 +8,7 @@ public class Proyectil : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // Verificar si el objeto impactado tiene el script "Enemy"
+        // Verificar si el objeto impactado tiene el script "Enemigos"
         Enemigos enemy = collision.gameObject.GetComponent<Enemigos>();
         if (enemy != null)
         {
@@ -17,6 +17,17 @@ public class Proyectil : MonoBehaviour
 
         // Destruir el proyectil después del impacto
         Destroy(gameObject);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Alternativa para detectar enemigos si usas Triggers en lugar de Colliders
+        Enemigos enemy = other.GetComponent<Enemigos>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage); // Aplicar daño al enemigo
+            Destroy(gameObject); // Destruir el proyectil
+        }
     }
 }
 

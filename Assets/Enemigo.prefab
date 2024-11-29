@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 08b6028883f00254391d61827b57c54c,
         type: 3}
       propertyPath: m_Name
-      value: Manny
+      value: Enemigo
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 08b6028883f00254391d61827b57c54c,
         type: 3}
@@ -95,6 +95,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1231784734563772901}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08b6028883f00254391d61827b57c54c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5938257811606274410}
   m_SourcePrefab: {fileID: 100100000, guid: 08b6028883f00254391d61827b57c54c, type: 3}
 --- !u!1 &8720715584257957245 stripped
 GameObject:
@@ -115,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  player: {fileID: 0}
 --- !u!65 &1231784734563772901
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -134,5 +139,27 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0046583, y: 1.2935414, z: 0.34463203}
+  m_Center: {x: -0.0023292387, y: 0.6615482, z: 0.05001809}
+--- !u!195 &5938257811606274410
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8720715584257957245}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

@@ -6,8 +6,7 @@ public class Disparo : MonoBehaviour
 {
     public GameObject projectilePrefab; // Prefab del proyectil
     public Transform firePoint;         // Punto desde donde se disparan las balas
-    public float projectileSpeed = 20f; // Velocidad del proyectil
-    
+    public float projectileSpeed = 50f; // Aumenté la velocidad del proyectil a un valor más alto
 
     void Update()
     {
@@ -20,6 +19,13 @@ public class Disparo : MonoBehaviour
 
     void Shoot()
     {
+        // Verificar si el firePoint está configurado correctamente
+        if (firePoint == null)
+        {
+            Debug.LogError("FirePoint no está configurado en el script Disparo.");
+            return;
+        }
+
         // Instanciar el proyectil en la posición y rotación del firePoint
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 
@@ -34,5 +40,5 @@ public class Disparo : MonoBehaviour
         Destroy(projectile, 3f);
     }
 
-    
+
 }
