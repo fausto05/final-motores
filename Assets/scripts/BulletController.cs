@@ -8,7 +8,7 @@ public class BulletController : MonoBehaviour
     public float moveSpeed, lifeTime;
     public Rigidbody rb;
     public GameObject impactEffect;
-    public int damage;
+    
     void Start()
     {
         
@@ -30,7 +30,7 @@ public class BulletController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
+            other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy();
         }
         
         Destroy(gameObject);
