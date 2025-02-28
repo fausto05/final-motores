@@ -22,6 +22,9 @@ public class EnemyHealthController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gm.defeatedEnemies++;  // Incrementa el contador de enemigos derrotados
+
             Destroy(gameObject);
         }
     }

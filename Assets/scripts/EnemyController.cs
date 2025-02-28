@@ -38,6 +38,12 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             rb.velocity = Vector3.zero; // Detener el movimiento para evitar el efecto de "globo"
+
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(1);  // Inflige 1 de daño al jugador
+            }
         }
     }
 }
