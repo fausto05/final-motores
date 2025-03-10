@@ -8,41 +8,41 @@ public class EnemyController : MonoBehaviour
     public Rigidbody rb;
     private Transform player;
 
-    void Start()
+    private void Start()
     {
-        // Buscar al jugador si no tienes una referencia directa
+        // Buscar al jugador para perseguirlo
         if (PlayerMovement.Instance != null)
         {
             player = PlayerMovement.Instance.transform;
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (player == null) return; // Evita errores si el jugador no ha sido asignado
+        if (player == null) return; // Si el jugador no existe, no hacer nada
 
-        // Hacer que el enemigo mire al jugador
+        // Direccionar al enemigo hacia el jugador
         Vector3 direction = (player.position - transform.position).normalized;
-        direction.y = 0; // Evita que mire hacia arriba o abajo
+        direction.y = 0; // Evitar que mire hacia arriba o abajo
 
-        // Rotar suavemente hacia el jugador
+        // Rotacion suave hacia el jugador
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.fixedDeltaTime * 5));
 
-        // Mover hacia adelante en la dirección en la que está mirando
+        // Moverse hacia el jugador
         rb.velocity = transform.forward * moveSpeed;
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            rb.velocity = Vector3.zero; // Detener el movimiento para evitar el efecto de "globo"
+            rb.velocity = Vector3.zero; // Detener el movimiento para evitar que rebote
 
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(1);  // Inflige 1 de daño al jugador
+                playerHealth.TakeDamage(1); // Hacer daño al jugador
             }
         }
     }

@@ -197,6 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 5
+  corazonPrefab: {fileID: 7826048840253730711, guid: 5eca7d0b98bcb544999b8aba799cf894,
+    type: 3}
 --- !u!114 &8974242592150994221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6294cacef01ccdb47b715175e14efb97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 10
   rb: {fileID: 1550180392771434571}
 --- !u!195 &1124490309269533925
 NavMeshAgent:

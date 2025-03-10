@@ -16,19 +16,18 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         spawning = false;
-        wave = 1; // Primera oleada
-        enemiesToSpawn = 2; // Inicia con 2 enemigos
+        wave = 1; // Comenzar en la primera oleada
+        enemiesToSpawn = 2; // Iniciar con 2 enemigos
         enemiesSpawned = 0;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
     {
-        // Espera a que todos los enemigos sean derrotados antes de iniciar la siguiente oleada
+        // Esperar a que todos los enemigos sean derrotados antes de iniciar la siguiente oleada
         if (!spawning && gameManager.defeatedEnemies == enemiesSpawned)
         {
-            // Si ya terminaste la tercera oleada, ganar el juego
-            if (wave > 3)
+            if (wave > 3) // Si ya termino la tercera oleada, el jugador gana
             {
                 gameManager.WinGame();
                 return;
@@ -38,35 +37,34 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnWave()
+    private IEnumerator SpawnWave()
     {
         spawning = true;
-        gameManager.defeatedEnemies = 0; // Reiniciar contador de enemigos derrotados
-        yield return new WaitForSeconds(4); // Espera antes de iniciar la oleada
+        gameManager.defeatedEnemies = 0; // Reiniciar el contador de enemigos derrotados
+        yield return new WaitForSeconds(4); // Esperar antes de empezar la oleada
 
         enemiesSpawned = 0;
 
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             SpawnEnemy();
-            yield return new WaitForSeconds(2); // Espera entre spawns
+            yield return new WaitForSeconds(2); // Esperar entre spawns
         }
 
-        // Aumentar oleada pero no permitir que pase de 3
         wave++;
         if (wave <= 3)
         {
-            enemiesToSpawn *= 2; // Duplica la cantidad de enemigos por oleada
+            enemiesToSpawn *= 2; // Duplicar la cantidad de enemigos en cada oleada
         }
 
         spawning = false;
     }
 
-    void SpawnEnemy()
+    private void SpawnEnemy()
     {
         int spawnPos = Random.Range(0, spawnPoints.Length);
 
-        // Selección del tipo de enemigo según la oleada
+        // Determinar que tipo de enemigo generar segun la oleada
         if (wave == 1)
         {
             enemyType = 0;

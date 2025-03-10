@@ -5,24 +5,18 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float moveSpeed, lifeTime;
+    public float moveSpeed, lifeTime; // Velocidad y tiempo de vida de la bala
     public Rigidbody rb;
-    public GameObject impactEffect;
-    
-    void Start()
-    {
-        
-    }
+    public GameObject impactEffect; // Efecto visual al impactar
 
-    void Update()
+    private void Update()
     {
-        rb.velocity = transform.forward * moveSpeed;
+        rb.velocity = transform.forward * moveSpeed; // Mover la bala en la direccion en la que fue disparada
 
         lifeTime -= Time.deltaTime;
-
         if (lifeTime <= 0)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Destruir la bala si dura demasiado
         }
     }
 
@@ -30,10 +24,10 @@ public class BulletController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy();
+            other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(); // Hacer daño al enemigo
         }
-        
-        Destroy(gameObject);
-        Instantiate(impactEffect, transform.position, transform.rotation);
+
+        Instantiate(impactEffect, transform.position, transform.rotation); // Crear efecto de impacto
+        Destroy(gameObject); // Destruir la bala despues del impacto
     }
 }

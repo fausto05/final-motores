@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class EnemyHealthController : MonoBehaviour
 {
-    public int currentHealth = 5;
+    public int currentHealth = 5; // Vida del enemigo
+    private GameManager gameManager;
 
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void DamageEnemy()
@@ -22,10 +18,14 @@ public class EnemyHealthController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-            gm.defeatedEnemies++;  // Incrementa el contador de enemigos derrotados
+            gameManager.defeatedEnemies++; // Incrementar el contador de enemigos derrotados
+            Destroy(gameObject); // Eliminar enemigo
 
-            Destroy(gameObject);
+            // Verificar si se eliminaron todos los enemigos para ganar el juego
+            if (gameManager.defeatedEnemies == 14) 
+            {
+                gameManager.WinGame();
+            }
         }
     }
 }
